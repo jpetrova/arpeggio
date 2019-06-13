@@ -1,11 +1,12 @@
-/* Написать функцию, которая принимает массив целых чисел и возвращает новый массив,
-каждый элемент которого увеличен на 1
-1 используя цикл for
-2 используя цикл while
-3 используя рекурсию
-4 используя map
-5 используя fold */
-
+/**
+ * Написать функцию, которая принимает массив целых чисел и возвращает новый массив,
+ * каждый элемент которого увеличен на 1
+ * 1. используя цикл for
+ * 2. используя цикл while
+ * 3. используя рекурсию
+ * 4. используя map
+ * 5. используя fold
+ */
 
 function forPlus1(xs) {
   const ys = []
@@ -15,8 +16,7 @@ function forPlus1(xs) {
   return ys
 }
 
-const result1 = forPlus1([1, 2, 3])
-console.log("forPlus1", result1)
+console.log("forPlus1", forPlus1([1, 2, 3]))
 
 function whilePlus1(xs) {
   const ys = []
@@ -29,8 +29,7 @@ function whilePlus1(xs) {
   return ys
 }
 
-const whileResult = whilePlus1([1, 2, 3])
-console.log("whilePlus", whileResult)
+console.log("whilePlus", whilePlus1([1, 2, 3]))
 
 function recPlus1(xs) {
 
@@ -43,9 +42,7 @@ function recPlus1(xs) {
       return go(i + 1, ys)
     }
   }
-  const result = go(0, [])
-  return result
+  return go(0, [])
 }
 
-const recResult = recPlus1([1, 2, 3])
-console.log("recResult", recResult)
+console.log("recResult", recPlus1([1, 2, 3]))
