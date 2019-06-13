@@ -1,6 +1,7 @@
 /**
  * Написать функцию, которая принимает массив целых чисел и возвращает новый массив,
  * каждый элемент которого увеличен на 1
+ * 
  * 1. используя цикл for
  * 2. используя цикл while
  * 3. используя рекурсию
@@ -22,8 +23,7 @@ function whilePlus1(xs) {
   const ys = []
   var i = 0
   while(i < xs.length) {
-    const v = xs[i]
-    ys[i] = v + 1
+    ys[i] = xs[i] + 1
     i = i + 1
   }
   return ys
@@ -37,8 +37,7 @@ function recPlus1(xs) {
     if (i >= xs.length) {
       return ys
     } else {
-      const v = xs[i]
-      ys[i] = v + 1
+      ys[i] = xs[i] + 1
       return go(i + 1, ys)
     }
   }
