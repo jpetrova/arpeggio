@@ -22,7 +22,7 @@ console.log("forPlus1", forPlus1([1, 2, 3]))
 function whilePlus1(xs) {
   const ys = []
   var i = 0
-  while(i < xs.length) {
+  while (i < xs.length) {
     ys[i] = xs[i] + 1
     i = i + 1
   }
