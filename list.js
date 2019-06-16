@@ -1,11 +1,11 @@
 /**
-* Модуль для работы с массивом как со списком.
-*/
+ * Модуль для работы с массивом как со списком.
+ */
 const List = {
 
   /** 
-  * Является ли список пустым
-  */
+   * Является ли список пустым
+   */
   isEmpty: function isEmpty(xs) {
     if (xs.length == 0) {
       return true
@@ -15,16 +15,16 @@ const List = {
   },
 
   /** 
-  * Голова списка
-  */
+   * Голова списка
+   */
   head: function head(xs) {
     const h = xs[0]
     return h
   },
 
   /**
-  * Хвост списка
-  */
+   * Хвост списка
+   */
   tail: function tail(xs) {
     const ys = []
     const ys2 = ys.concat(xs)
@@ -33,8 +33,8 @@ const List = {
   },
 
   /**
-  * Вставка в начало списка
-  */
+   * Вставка в начало списка
+   */
   prepend: function prepend(xs, s) {
     const s1 = [s]
     const ys = s1.concat(xs)
@@ -42,8 +42,8 @@ const List = {
   },
 
   /**
-  * Развернуть список
-  */
+   * Развернуть список
+   */
   reverse: function reverse(xs) {
     function go(xs, ys) {
       if (List.isEmpty(xs)) {
