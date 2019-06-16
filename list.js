@@ -1,55 +1,53 @@
-/**
- * Модуль для работы с массивом как со списком.
- */
-
-const List = {
- /* 
-  * 1. пустой ли массив
-  */
-    isEmpty: function isEmpty(xs) {
-      if (xs.length == 0) {
-        return true
-      } else {
+  /**
+   * Модуль для работы с массивом как со списком.
+   */
+ const List = {
+  /** 
+   * Пустой ли список
+   */
+   isEmpty: function isEmpty(xs) {
+     if (xs.length == 0) {
+       return true
+     } else {
         return false
-      }
-    },
- /* 
-  * 2. откусить голову
-  */
-    head: function head(xs) {
-      const h = xs[0]
-      return h
-    },
- /*
-  * 3. сохранить хвост и передать его дальше
-  */
-    tail: function tail(xs) {
-      const ys = []
-      const ys2 = ys.concat(xs)
-      const h = ys2.splice(0, 1)
-      return ys2
-    },
- /*
-  * 4. присоединить голову к другому массиву
-  */
-    prepend: function prepend(xs, s) {
-      const s1 = [s]
-      const ys = s1.concat(xs)
-      return ys
-    },
- /**
-  * 5. развернуть мыссив
-  */
-     reverse: function reverse(xs) {
+     }
+   },
+  /** 
+   * Голова списка
+   */
+   head: function head(xs) {
+     const h = xs[0]
+     return h
+   },
+  /**
+   * Хвост списка
+   */
+   tail: function tail(xs) {
+     const ys = []
+     const ys2 = ys.concat(xs)
+     const h = ys2.splice(0, 1)
+     return ys2
+   },
+  /**
+   * Вставка в начало списка
+   */
+   prepend: function prepend(xs, s) {
+     const s1 = [s]
+     const ys = s1.concat(xs)
+     return ys
+   },
+   /**
+    * Развернуть список
+    */
+   reverse: function reverse(xs) {
      function go(xs, ys) {
-       if (List.isEmpty(xs) == true) {
-        return ys
-       }
-       else {
-       const h = List.head(xs)
-       const ys1 = List.prepend(ys, h)
-       const xs1 = List.tail(xs)
-       return go(xs1, ys1)
+       if (List.isEmpty(xs)) {
+         return ys
+       } else {
+         const h = List.head(xs)
+         const ys1 = List.prepend(ys, h)
+         const xs1 = List.tail(xs)
+         return go(xs1, ys1)
        }
      } 
        return go(xs, [])
