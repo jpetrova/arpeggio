@@ -69,6 +69,23 @@ const ListOps = {
    */
   prepend: function prepend(x, xs) {
     return List.Cons(x, xs) 
+  },
+
+  /**
+   * Развернуть список
+   */
+  reverse: function reverse(xs) {
+    function go(xs, ys) {
+      if (ListOps.isEmpty(xs) == true) {
+        return ys
+      } else {
+        const x = ListOps.head(xs)
+        const ys1 = ListOps.prepend(x, ys)
+        const xs1 = ListOps.tail(xs)
+        return go(xs1, ys1)
+      }
+    }
+    return go(xs, List.Nil)
   }
 
 }
@@ -82,3 +99,4 @@ console.log('ListOps.head(List.Cons(1, List.Nil)) = ', ListOps.head(List.Cons(1,
 console.log('ListOps.tail(List.Nil) = ', ListOps.tail(List.Nil))
 console.log('ListOps.tail(List.Cons(1, List.Nil)) = ', ListOps.tail(List.Cons(1, List.Nil)))
 console.log('ListOps.prepend(2, List.Cons(1, List.Nil) = ', ListOps.prepend(2, List.Cons(1, List.Nil)))
+console.log('ListOps.reverse(List.Cons(1, List.Cons(2, List.Nil)) = ', ListOps.reverse(List.Cons(1, List.Cons(2, List.Nil))))
