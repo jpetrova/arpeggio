@@ -1,7 +1,35 @@
 /**
- * Модуль для работы с массивом как со списком.
+ * Структура данных список
  */
 const List = {
+  
+  /**
+   * Пустой список
+   */
+  Nil: {
+    isEmpty: true,
+    head: undefined,
+    tail: undefined
+  },
+  
+  /**
+   * Непустой список
+   */
+  Cons: function Cons(head, tail) {
+    return {
+      isEmpty: false,
+      head: head,
+      tail: tail
+    }
+  }
+
+}
+
+
+/**
+ * Модуль для работы со списком
+ */
+const ListOps = {
 
   /** 
    * Является ли список пустым
@@ -35,67 +63,17 @@ const List = {
   /**
    * Вставка в начало списка
    */
-  prepend: function prepend(xs, s) {
-    const s1 = [s]
-    const ys = s1.concat(xs)
-    return ys
-  },
-
-  /**
-   * Развернуть список
-   */
-  reverse: function reverse(xs) {
-    function go(xs, ys) {
-      if (List.isEmpty(xs)) {
-        return ys
-      } else {
-        const h = List.head(xs)
-        const ys1 = List.prepend(ys, h)
-        const xs1 = List.tail(xs)
-        return go(xs1, ys1)
-      }
-    } 
-    return go(xs, [])
+  prepend: function prepend(x, xs) {
+    return List.Cons(x, xs) 
   }
 
 }
 
-/**
- * Принимает на вход коллекцию целых чисел
- * возвращает коллекцию с эллементами < 5
- * порядок не сохраняется
- */
-function filter(xs) {
-  function go(xs, ys) {
-    if (List.isEmpty(xs)) {
-      return ys
-    } else {
-      const h = List.head(xs)
-      if (h > 5) {
-        const tl = List.tail(xs)
-        return go(tl, ys)
-      } else {
-        const ys1 = List.prepend(ys, h)
-        const xs1 = List.tail(xs)
-        return go(xs1, ys1)
-      }
-    } 
-  }
-  return go(xs, [])
-}
+console.log('List.Nil = ', List.Nil)
+console.log('List.Cons(1, List.Nil) = ', List.Cons(1, List.Nil))
 
-const test1 = List.isEmpty([1,2,3])
-const test2 = List.isEmpty([])
-const test3 = List.head([1,2,3])
-const test4 = List.tail([1,2,3])
-const test5 = List.prepend([1,2,3], 0)
-const test6 = List.reverse([1,2,3])
-const test7 = filter([1,2,3,4,5,6])
-
-console.log('List.isEmpty([1,2,3]) = ', test1)
-console.log('List.isEmpty([]) = ', test2)
-console.log('List.head([1,2,3]) = ', test3)
-console.log('List.tail([1,2,3]) = ', test4)
-console.log('List.prepend([1,2,3], 0) = ', test5)
-console.log('List.reverse [1,2,3] = ', test6)
-console.log('filter([1,2,3,4,5,6]) = ', test7)
+console.log('ListOps.isEmpty([1,2,3]) = ', ListOps.isEmpty([1,2,3]))
+console.log('ListOps.isEmpty([]) = ', ListOps.isEmpty([]))
+console.log('ListOps.head([1,2,3]) = ', ListOps.head([1,2,3]))
+console.log('ListOps.tail([1,2,3]) = ', ListOps.tail([1,2,3]))
+console.log('ListOps.prepend(2, List.Cons(1, List.Nil) = ', ListOps.prepend(2, List.Cons(1, List.Nil)))
