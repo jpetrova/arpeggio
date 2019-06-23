@@ -88,6 +88,17 @@ const ListOps = {
       }
     }
     return go(xs, '')
+  },
+
+  /**
+   * toString
+   */
+  toString: function toString(xs) {
+    const strBig = 'List('
+    const sep = ', '
+    const str = ListOps.mkString(xs, sep)
+    const strEnd = ')'
+    return strBig + str + strEnd
   }
 
 }
@@ -109,3 +120,4 @@ console.log('ListOps.reverse(List.Cons(1, List.Cons(2, List.Nil)) = ', ListOps.r
 console.log('ListOps.mkString(List.Cons(a, List.Cons(b, List.Nil))) = ', ListOps.mkString(List.Cons('a', List.Cons('b', List.Nil)), ', '))
 console.log('ListOps.mkString(List.Nil, ', ') = ', ListOps.mkString(List.Nil, ', '))
 console.log('ListOps.mkString(List.Cons(1, List.Nil), ', ') = ', ListOps.mkString(List.Cons(1, List.Nil), ', '))
+console.log('ListOps.toString(List.Cons(a, List.Cons(b, List.Nil))) = ', ListOps.toString(List.Cons('a', List.Cons('b', List.Nil)), ', '))
