@@ -91,11 +91,10 @@ const ListOps = {
   },
 
   /**
-   * Оформление строки
+   * Строковое представлене списка
    */
   toString: function toString(xs) {
-    const sep = ', '
-    return 'List(' + ListOps.mkString(xs, sep) + ')'
+    return 'List(' + ListOps.mkString(xs, ', ') + ')'
   }
 
 }
