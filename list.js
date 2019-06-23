@@ -72,6 +72,30 @@ const ListOps = {
       }
     }
     return go(xs, List.Nil)
+  },
+
+  /**
+   * Сделать строку из списка
+   */
+  mkString: function mkString(xs, sep) {
+    function go(xs, str) {
+      if (ListOps.isEmpty(xs)) {
+        return str
+      } else if (ListOps.isEmpty(xs.tail)) {
+        const x = xs.head
+        const xStr = x.toString()
+        const str1 = str + xStr
+        const xs1 = xs.tail
+        return go(xs1, str1)
+      } else {
+        const x = xs.head
+        const xStr = x.toString()
+        const str1 = str + xStr + sep
+        const xs1 = xs.tail
+        return go(xs1, str1)
+      }
+    }
+    return go(xs, '')
   }
 
 }
@@ -90,3 +114,6 @@ console.log('oneElementList.tail = ', oneElementList.tail)
 console.log('emptyList.tail = ', emptyList.tail)
 console.log('ListOps.prepend(2, List.Cons(1, List.Nil) = ', ListOps.prepend(2, List.Cons(1, List.Nil)))
 console.log('ListOps.reverse(List.Cons(1, List.Cons(2, List.Nil)) = ', ListOps.reverse(List.Cons(1, List.Cons(2, List.Nil))))
+console.log('ListOps.mkString(List.Cons(a, List.Cons(b, List.Nil))) = ', ListOps.mkString(List.Cons('a', List.Cons('b', List.Nil)), ', '))
+console.log('ListOps.mkString(List.Nil, ', ') = ', ListOps.mkString(List.Nil, ', '))
+console.log('ListOps.mkString(List.Cons(1, List.Nil), ', ') = ', ListOps.mkString(List.Cons(1, List.Nil), ', '))
