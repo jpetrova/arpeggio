@@ -91,14 +91,11 @@ const ListOps = {
   },
 
   /**
-   * toString
+   * Оформление строки
    */
   toString: function toString(xs) {
-    const strBig = 'List('
     const sep = ', '
-    const str = ListOps.mkString(xs, sep)
-    const strEnd = ')'
-    return strBig + str + strEnd
+    return 'List(' + ListOps.mkString(xs, sep) + ')'
   }
 
 }
