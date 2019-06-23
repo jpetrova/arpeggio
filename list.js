@@ -82,17 +82,9 @@ const ListOps = {
       if (ListOps.isEmpty(xs)) {
         return str
       } else if (ListOps.isEmpty(xs.tail)) {
-        const x = xs.head
-        const xStr = x.toString()
-        const str1 = str + xStr
-        const xs1 = xs.tail
-        return go(xs1, str1)
+        return go(xs.tail, str + xs.head.toString())
       } else {
-        const x = xs.head
-        const xStr = x.toString()
-        const str1 = str + xStr + sep
-        const xs1 = xs.tail
-        return go(xs1, str1)
+        return go(xs.tail, str + xs.head.toString() + sep)
       }
     }
     return go(xs, '')
