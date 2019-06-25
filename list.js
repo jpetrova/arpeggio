@@ -99,21 +99,102 @@ const ListOps = {
 
 }
 
+/**
+ * Функция, которая принимает список чисел, возвращает новый список, каждый эллемент которого умножен на 2
+ * [1, 2, 3, 4] -> [2, 4, 6, 8]
+ */
+function doubleList(xs) {
+  function go(xs, ys) {
+    if (ListOps.isEmpty(xs)) {
+      return ListOps.reverse(ys)
+    } else {
+      const x = xs.head * 2
+      const ys1 = ListOps.prepend(x, ys)
+      const xs1 = xs.tail
+      return go(xs1, ys1)
+    }
+  }
+  return go(xs, List.Nil)
+}
 
-const oneElementList = List.Cons(1, List.Nil)
-const emptyList = List.Nil
+/**
+ * Функция, которая принимает список строк и возвращает список, где все строки прописными буквами
+ * 'a, b, c, d', 'cbhi'  -> 'A, B, C, D, CBHI'
+ * 
+ */
+function capitalLetters(xs){
+  function go(xs, ys) {
+    if (ListOps.isEmpty(xs)) {
+      return ListOps.reverse(ys)
+    } else {
+      const x = xs.head
+      const x0 = x.toUpperCase()
+      const ys1 = ListOps.prepend(x0, ys)
+      const xs1 = xs.tail
+      return go(xs1, ys1)
+    }
+  }
+  return go(xs, List.Nil)
+}
 
-console.log('List.Nil = ', List.Nil)
-console.log('List.Cons(1, List.Nil) = ', List.Cons(1, List.Nil))
-console.log('ListOps.isEmpty(List.Nil) = ', ListOps.isEmpty(List.Nil))
-console.log('ListOps.isEmpty(List.Cons(1, List.Nil)) = ', ListOps.isEmpty(List.Cons(1, List.Nil)))
-console.log('oneElementList.head = ', oneElementList.head)
-console.log('emptyList.head = ', emptyList.head)
-console.log('oneElementList.tail = ', oneElementList.tail)
-console.log('emptyList.tail = ', emptyList.tail)
-console.log('ListOps.prepend(2, List.Cons(1, List.Nil) = ', ListOps.prepend(2, List.Cons(1, List.Nil)))
-console.log('ListOps.reverse(List.Cons(1, List.Cons(2, List.Nil)) = ', ListOps.reverse(List.Cons(1, List.Cons(2, List.Nil))))
-console.log('ListOps.mkString(List.Cons(a, List.Cons(b, List.Nil))) = ', ListOps.mkString(List.Cons('a', List.Cons('b', List.Nil)), ', '))
-console.log('ListOps.mkString(List.Nil, ', ') = ', ListOps.mkString(List.Nil, ', '))
-console.log('ListOps.mkString(List.Cons(1, List.Nil), ', ') = ', ListOps.mkString(List.Cons(1, List.Nil), ', '))
-console.log('ListOps.toString(List.Cons(a, List.Cons(b, List.Nil))) = ', ListOps.toString(List.Cons('a', List.Cons('b', List.Nil)), ', '))
+/**
+ * Написать функцию, которая принимает список целых чисел и возвращает список, в котором каждый эл-т
+ * возведен в степень значения этого эл-та
+ * [2, 3, 4] -> [4, 27, 256]
+ */
+function exponent(xs) {
+  function go(xs, ys) {
+    if (ListOps.isEmpty(xs)) {
+      return ListOps.reverse(ys)
+    } else {
+      const s = xs.head
+      const x = Math.pow(s, s)
+      const ys1 = ListOps.prepend(x, ys)
+      const xs1 = xs.tail
+      return go(xs1, ys1)
+    }
+  }
+  return go(xs, List.Nil)
+}
+
+function f1(x) {
+  return x.toString()
+}
+
+function f2(x) {
+  return x.toUpperCase()
+}
+
+function f3(x) {
+  return String.fromCharCode(x)
+}
+
+function f4(x) {
+  return x + 96
+}
+
+function map(xs, f) {
+  function go(xs, ys) {
+    if (ListOps.isEmpty(xs)) {
+      return ListOps.reverse(ys)
+    } else {
+      const x = f(xs.head)
+      const ys1 = ListOps.prepend(x, ys)
+      const xs1 = xs.tail
+      return go(xs1, ys1)
+    }
+  }
+  return go(xs, List.Nil)
+}
+
+const data = List.Cons(1, List.Cons(2, List.Cons(3, List.Nil)))
+const test1 = map(data, f4)
+const test2 = map(test1, f1)
+const test3 = map(test2, f3)
+const test4 = map(test3, f2)
+
+console.log('data = ', ListOps.toString(data))
+console.log('map(data, f1) =', ListOps.toString(test1))
+console.log('map(test1, f4) =', ListOps.toString(test2))
+console.log('map(test2, f3) =', ListOps.toString(test3))
+console.log('map(test3, f2) =', ListOps.toString(test4))
