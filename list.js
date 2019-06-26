@@ -126,7 +126,7 @@ function toString(x) {
 
 /**
  * Функция, которая принимает строку и возвращает значение строки,
- * на которой она была вызвана, преобразованное в верхний регистр : abh -> ABH
+ * на которой она была вызвана, преобразованное в верхний регистр: abh -> ABH
  */
 function toUpper(x) {
   return x.toUpperCase()
@@ -141,7 +141,7 @@ function charCode(x) {
   return String.fromCharCode(x)
 }
 
-function sum(x) {
+function plus96(x) {
   return x + 96
 }
 
@@ -163,7 +163,7 @@ function pow(x) {
 
 
 const data = List.Cons(1, List.Cons(2, List.Cons(3, List.Nil)))
-const test1 = ListOps.map(data, sum)
+const test1 = ListOps.map(data, plus96)
 const test2 = ListOps.map(test1, toString)
 const test3 = ListOps.map(test2, charCode)
 const test4 = ListOps.map(test3, toUpper)
