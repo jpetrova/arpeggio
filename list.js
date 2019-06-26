@@ -99,7 +99,7 @@ const ListOps = {
 
   /**
    * Функция map, которая принимает список и функцию f. И возвращает новый список, в котором к
-   * каждому эл-ту была применена функция f
+   * каждому элементу была применена функция f
    */
   map: function map(xs, f) {
     function go(xs, ys) {
@@ -118,16 +118,17 @@ const ListOps = {
 }
 
 /**
- * Функция, которая принимает преобразует x в строку
+ * Функция, которая принимает x и возвращает строковое представление x
  */
-function f1(x) {
+function toString(x) {
   return x.toString()
 }
 
 /**
- * Функция, которая принимает символ и возвращает его в верхнем регистре: a -> A
+ * Функция, которая принимает строку и возвращает значение строки,
+ * на которой она была вызвана, преобразованное в верхний регистр : abh -> ABH
  */
-function f2(x) {
+function toUpper(x) {
   return x.toUpperCase()
 }
 
@@ -136,11 +137,11 @@ function f2(x) {
  * созданную из указанной последовательности значений Юникода
  * 97 -> a
  */
-function f3(x) {
+function charCode(x) {
   return String.fromCharCode(x)
 }
 
-function f4(x) {
+function sum(x) {
   return x + 96
 }
 
@@ -148,24 +149,24 @@ function f4(x) {
  * Функция, которая принимает число и умножает его на 2
  * 4 -> 8
  */
-function f5(x) {
+function double(x) {
   return x * 2
 }
 
 /**
  * Функция, которая принимает целое число и возводит его в степень, равную этому числу
- * 3 -> 9
+ * 3 -> 27
  */
-function f6(x) {
+function pow(x) {
   return Math.pow(x, x)
 }
 
 
 const data = List.Cons(1, List.Cons(2, List.Cons(3, List.Nil)))
-const test1 = ListOps.map(data, f4)
-const test2 = ListOps.map(test1, f1)
-const test3 = ListOps.map(test2, f3)
-const test4 = ListOps.map(test3, f2)
+const test1 = ListOps.map(data, sum)
+const test2 = ListOps.map(test1, toString)
+const test3 = ListOps.map(test2, charCode)
+const test4 = ListOps.map(test3, toUpper)
 
 console.log('data = ', ListOps.toString(data))
 console.log('map(data, f1) =', ListOps.toString(test1))
