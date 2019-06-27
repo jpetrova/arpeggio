@@ -165,14 +165,11 @@ function pow(x) {
  * Функция, которая принимает список и возвращает сумму всех его элементов
  */
 function sum(xs) {
-  function go(xs, b) {
+  function go(xs, acc) {
     if (ListOps.isEmpty(xs)) {
-      return b
+      return acc
     } else {
-      const b1 = (xs.head)
-      const acc = b + b1
-      const xs1 = xs.tail
-      return go(xs1, acc)
+      return go(xs.tail, acc + xs.head)
     }
   }
   return go(xs, 0)
