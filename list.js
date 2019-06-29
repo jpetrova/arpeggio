@@ -190,15 +190,15 @@ function product(xs) {
 }  
 
 /**
- * Написать функцию, которая принимает список строк и возвращает строку, которая является результатом
+ * Функция, которая принимает список строк и возвращает строку, которая является результатом
  * конкатинации всех строк в списке
  */
 function concat(xs) {
-  function go(xs, ys) {
+  function go(xs, str) {
     if (ListOps.isEmpty(xs)) {
-      return ys
+      return str
     } else {
-      return go(xs.tail, ys + xs.head)
+      return go(xs.tail, str + xs.head)
     }
   }
   return go(xs, '')
@@ -222,4 +222,4 @@ console.log('map(test2, f3) =', ListOps.toString(test3))
 console.log('map(test3, f2) =', ListOps.toString(test4))
 console.log('sum = ', test5)
 console.log('product = ', test6)
-console.log('concat = ', test7)
+console.log('concat = ', test7) // concat =  1234567
