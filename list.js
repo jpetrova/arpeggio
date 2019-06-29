@@ -175,12 +175,29 @@ function sum(xs) {
   return go(xs, 0)
 }  
 
-const data = List.Cons(1, List.Cons(2, List.Cons(3, List.Nil)))
+/**
+ * Функция, которая принимает список и возвращает произведение всех его элементов
+ */
+function product(xs) {
+  function go(xs, acc) {
+    if (ListOps.isEmpty(xs)) {
+      return acc
+    } else {
+      return go(xs.tail, acc * xs.head)
+    }
+  }
+  return go(xs, 1)
+}  
+
+
+
+const data = List.Cons(5, List.Cons(2, List.Cons(3, List.Nil)))
 const test1 = ListOps.map(data, plus96)
 const test2 = ListOps.map(test1, toString)
 const test3 = ListOps.map(test2, charCode)
 const test4 = ListOps.map(test3, toUpper)
 const test5 = sum(data)
+const test6 = product(data)
 
 console.log('data = ', ListOps.toString(data))
 console.log('map(data, f1) =', ListOps.toString(test1))
@@ -188,3 +205,4 @@ console.log('map(test1, f4) =', ListOps.toString(test2))
 console.log('map(test2, f3) =', ListOps.toString(test3))
 console.log('map(test3, f2) =', ListOps.toString(test4))
 console.log('sum = ', test5)
+console.log('product = ', test6)
