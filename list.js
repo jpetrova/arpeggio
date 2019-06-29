@@ -160,50 +160,36 @@ function double(x) {
 function pow(x) {
   return Math.pow(x, x)
 }
+ 
 
 /**
- * Функция, которая принимает список и возвращает сумму всех его элементов
+ * Функция  fold сворачивает коллекцию. fold принимает список, начальное значение аккумулятора и
+ * функцию f. Функция f принимает аккумулятор и элемент, и возвращает новый аккумулятор.
  */
-function sum(xs) {
+function fold(xs, zero, f) {
   function go(xs, acc) {
     if (ListOps.isEmpty(xs)) {
       return acc
     } else {
-      return go(xs.tail, acc + xs.head)
+      return go(xs.tail, f(acc, xs.head))
     }
   }
-  return go(xs, 0)
-}  
+  return go(xs, zero)
+}
 
 /**
- * Функция, которая принимает список и возвращает произведение всех его элементов
+ * Функция, которая принимает два элемента и объединяет их
  */
-function product(xs) {
-  function go(xs, acc) {
-    if (ListOps.isEmpty(xs)) {
-      return acc
-    } else {
-      return go(xs.tail, acc * xs.head)
-    }
-  }
-  return go(xs, 1)
-}  
+function concat(acc, x) {
+  return acc + x
+}
 
 /**
- * Функция, которая принимает список строк и возвращает строку, которая является результатом
- * конкатенации всех строк в списке
+ * Функция, которая принимает два элемента и возвращает их произведение
  */
-function concat(xs) {
-  function go(xs, str) {
-    if (ListOps.isEmpty(xs)) {
-      return str
-    } else {
-      return go(xs.tail, str + xs.head)
-    }
-  }
-  return go(xs, '')
-}  
-
+function product(acc, x) {
+  return acc * x
+}
 
 const data = List.Cons(5, List.Cons(2, List.Cons(3, List.Nil)))
 const data1 = List.Cons('12', List.Cons('34', List.Cons('567', List.Nil)))
@@ -211,15 +197,17 @@ const test1 = ListOps.map(data, plus96)
 const test2 = ListOps.map(test1, toString)
 const test3 = ListOps.map(test2, charCode)
 const test4 = ListOps.map(test3, toUpper)
-const test5 = sum(data)
-const test6 = product(data)
-const test7 = concat(data1)
+const test5 = fold(data, 0, concat)
+const test6 = fold(data1, '', concat)
+const test7 = fold(data, 1, product)
+
+
 
 console.log('data = ', ListOps.toString(data))
 console.log('map(data, f1) =', ListOps.toString(test1))
 console.log('map(test1, f4) =', ListOps.toString(test2))
 console.log('map(test2, f3) =', ListOps.toString(test3))
 console.log('map(test3, f2) =', ListOps.toString(test4))
-console.log('sum = ', test5)
-console.log('product = ', test6)
-console.log('concat = ', test7) // concat =  1234567
+console.log('fold(data, 0, concat) = ', test5) // concat = 10
+console.log('fold(data1, " ", concat) = ', test6) // concat =  1234567
+console.log('fold(data, 1, product = ', test7) // product = 30
