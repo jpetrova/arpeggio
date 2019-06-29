@@ -189,15 +189,31 @@ function product(xs) {
   return go(xs, 1)
 }  
 
+/**
+ * Написать функцию, которая принимает список строк и возвращает строку, которая является результатом
+ * конкатинации всех строк в списке
+ */
+function concat(xs) {
+  function go(xs, ys) {
+    if (ListOps.isEmpty(xs)) {
+      return ys
+    } else {
+      return go(xs.tail, ys + xs.head)
+    }
+  }
+  return go(xs, '')
+}  
 
 
 const data = List.Cons(5, List.Cons(2, List.Cons(3, List.Nil)))
+const data1 = List.Cons('12', List.Cons('34', List.Cons('567', List.Nil)))
 const test1 = ListOps.map(data, plus96)
 const test2 = ListOps.map(test1, toString)
 const test3 = ListOps.map(test2, charCode)
 const test4 = ListOps.map(test3, toUpper)
 const test5 = sum(data)
 const test6 = product(data)
+const test7 = concat(data1)
 
 console.log('data = ', ListOps.toString(data))
 console.log('map(data, f1) =', ListOps.toString(test1))
@@ -206,3 +222,4 @@ console.log('map(test2, f3) =', ListOps.toString(test3))
 console.log('map(test3, f2) =', ListOps.toString(test4))
 console.log('sum = ', test5)
 console.log('product = ', test6)
+console.log('concat = ', test7)
