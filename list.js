@@ -163,10 +163,10 @@ function pow(x) {
  
 
 /**
- * Функция  fold сворачивает коллекцию. fold принимает список, начальное значение аккумулятора и
+ * Функция fold сворачивает коллекцию. fold принимает список, начальное значение аккумулятора и
  * функцию f. Функция f принимает аккумулятор и элемент, и возвращает новый аккумулятор.
  */
-function fold(xs, zero, f) {
+function foldLeft(xs, zero, f) {
   function go(xs, acc) {
     if (ListOps.isEmpty(xs)) {
       return acc
@@ -175,6 +175,18 @@ function fold(xs, zero, f) {
     }
   }
   return go(xs, zero)
+}
+
+function foldRight(xs, zero, f) {
+  const xs1 = ListOps.reverse(xs)
+  function go(xs1, acc) {
+    if (ListOps.isEmpty(xs1)) {
+      return acc
+    } else {
+      return go(xs1.tail, f(acc, xs1.head))
+    }
+  }
+  return go(xs1, zero)
 }
 
 /**
@@ -197,9 +209,10 @@ const test1 = ListOps.map(data, plus96)
 const test2 = ListOps.map(test1, toString)
 const test3 = ListOps.map(test2, charCode)
 const test4 = ListOps.map(test3, toUpper)
-const test5 = fold(data, 0, concat)
-const test6 = fold(data1, '', concat)
-const test7 = fold(data, 1, product)
+const test5 = foldLeft(data, 0, concat)
+const test6 = foldLeft(data1, '', concat)
+const test7 = foldLeft(data, 1, product)
+const test8 = foldRight(data1, '', concat)
 
 
 
@@ -208,6 +221,7 @@ console.log('map(data, f1) =', ListOps.toString(test1))
 console.log('map(test1, f4) =', ListOps.toString(test2))
 console.log('map(test2, f3) =', ListOps.toString(test3))
 console.log('map(test3, f2) =', ListOps.toString(test4))
-console.log('fold(data, 0, concat) = ', test5) // concat = 10
-console.log('fold(data1, " ", concat) = ', test6) // concat =  1234567
-console.log('fold(data, 1, product = ', test7) // product = 30
+console.log('foldLeft(data, 0, concat) = ', test5) // concat = 10
+console.log('foldLeft(data1, " ", concat) = ', test6) // concat =  1234567
+console.log('foldLeft(data, 1, product = ', test7) // product = 30
+console.log('foldRight(data1, " ", concat) = ', test8) // foldRight = 5673412
