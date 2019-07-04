@@ -118,7 +118,7 @@ const ListOps = {
   /**
    * Функция fold сворачивает коллекцию. fold принимает список, начальное значение аккумулятора и
    * функцию f. Функция f принимает аккумулятор и элемент, и возвращает новый аккумулятор.
-   * Функция foldLeft работает со списком слева направо
+   * Функция foldLeft сворачивает список слева направо
    */
   foldLeft: function foldLeft(xs, zero, f) {
     function go(xs, acc) {
@@ -132,7 +132,7 @@ const ListOps = {
   },
 
   /**
-   * Функция foldRight работает со списком справа налево
+   * Функция foldRight сворачивает список справа налево
    */
   foldRight: function foldRight(xs, zero, f) {
     const ys = ListOps.reverse(xs)
