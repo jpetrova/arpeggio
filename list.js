@@ -113,9 +113,34 @@ const ListOps = {
       }
     }
     return go(xs, List.Nil)
-  }  
+  },
 
+  /**
+   * Функция fold сворачивает коллекцию. fold принимает список, начальное значение аккумулятора и
+   * функцию f. Функция f принимает аккумулятор и элемент, и возвращает новый аккумулятор.
+   * Функция foldLeft сворачивает список слева направо
+   */
+  foldLeft: function foldLeft(xs, zero, f) {
+    function go(xs, acc) {
+      if (ListOps.isEmpty(xs)) {
+        return acc
+      } else {
+        return go(xs.tail, f(acc, xs.head))
+      }
+    }
+    return go(xs, zero)
+  },
+
+  /**
+   * Функция foldRight сворачивает список справа налево
+   */
+  foldRight: function foldRight(xs, zero, f) {
+    const ys = ListOps.reverse(xs)
+    return ListOps.foldLeft(ys, zero, f)
+  }
+  
 }
+
 
 /**
  * Функция, которая принимает x и возвращает строковое представление x
@@ -160,66 +185,38 @@ function double(x) {
 function pow(x) {
   return Math.pow(x, x)
 }
+ 
+/**
+ * Функция, которая конкатенирует две строки
+ */
+function concat(acc, x) {
+  return acc + x
+}
 
 /**
- * Функция, которая принимает список и возвращает сумму всех его элементов
+ * Функция сложения
  */
-function sum(xs) {
-  function go(xs, acc) {
-    if (ListOps.isEmpty(xs)) {
-      return acc
-    } else {
-      return go(xs.tail, acc + xs.head)
-    }
-  }
-  return go(xs, 0)
-}  
+function sum(acc, x) {
+  return acc + x
+}
 
 /**
- * Функция, которая принимает список и возвращает произведение всех его элементов
+ * Функция, которая принимает два элемента и возвращает их произведение
  */
-function product(xs) {
-  function go(xs, acc) {
-    if (ListOps.isEmpty(xs)) {
-      return acc
-    } else {
-      return go(xs.tail, acc * xs.head)
-    }
-  }
-  return go(xs, 1)
-}  
-
-/**
- * Функция, которая принимает список строк и возвращает строку, которая является результатом
- * конкатенации всех строк в списке
- */
-function concat(xs) {
-  function go(xs, str) {
-    if (ListOps.isEmpty(xs)) {
-      return str
-    } else {
-      return go(xs.tail, str + xs.head)
-    }
-  }
-  return go(xs, '')
-}  
+function product(acc, x) {
+  return acc * x
+}
 
 
 const data = List.Cons(5, List.Cons(2, List.Cons(3, List.Nil)))
 const data1 = List.Cons('12', List.Cons('34', List.Cons('567', List.Nil)))
-const test1 = ListOps.map(data, plus96)
-const test2 = ListOps.map(test1, toString)
-const test3 = ListOps.map(test2, charCode)
-const test4 = ListOps.map(test3, toUpper)
-const test5 = sum(data)
-const test6 = product(data)
-const test7 = concat(data1)
 
-console.log('data = ', ListOps.toString(data))
-console.log('map(data, f1) =', ListOps.toString(test1))
-console.log('map(test1, f4) =', ListOps.toString(test2))
-console.log('map(test2, f3) =', ListOps.toString(test3))
-console.log('map(test3, f2) =', ListOps.toString(test4))
-console.log('sum = ', test5)
-console.log('product = ', test6)
-console.log('concat = ', test7) // concat =  1234567
+const test5 = ListOps.foldLeft(data, 0, sum)
+const test6 = ListOps.foldLeft(data1, '', concat)
+const test7 = ListOps.foldLeft(data, 1, product)
+const test8 = ListOps.foldRight(data1, '', concat)
+
+console.log('ListOps.foldLeft(data, 0, sum) = ', test5) // sum = 10
+console.log('ListOps.foldLeft(data1, " ", concat) = ', test6) // concat =  1234567
+console.log('ListOps.foldLeft(data, 1, product = ', test7) // product = 30
+console.log('ListOps.foldRight(data1, " ", concat) = ', test8) // foldRight = 5673412
