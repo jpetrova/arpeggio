@@ -203,25 +203,40 @@ function product(acc, x) {
   return acc * x
 }
 
-const data = List.Cons(5, List.Cons(2, List.Cons(3, List.Nil)))
-const data1 = List.Cons('12', List.Cons('34', List.Cons('567', List.Nil)))
-const test1 = ListOps.map(data, plus96)
-const test2 = ListOps.map(test1, toString)
-const test3 = ListOps.map(test2, charCode)
-const test4 = ListOps.map(test3, toUpper)
-const test5 = foldLeft(data, 0, concat)
-const test6 = foldLeft(data1, '', concat)
-const test7 = foldLeft(data, 1, product)
-const test8 = foldRight(data1, '', concat)
+/**
+ * Функция, которая принимает массив и возвращает список
+ */
+function fromArray(arr) {
+  function go(arr, xs) {
+    if (arr.length == 0) {
+      return xs
+    } else {
+      const x = arr.pop()
+      const xs1 = ListOps.prepend(x, xs) 
+      return go(arr, xs1)
+    }
+  }
+  return go(arr, List.Nil)
+}
 
+/**
+ * Функция, которая принимает строку и возвращает список
+ */
+function fromString(str){
+  function go(str, xs) {
+    if(str.length == 0) {
+      return ListOps.reverse(xs)
+    } else {
+      x = +str.charAt(0)
+      const xs1 = ListOps.prepend(x, xs)
+      str1 = str.substring(1)
+      return go(str1, xs1)
+    }
+  }
+  return go(str, List.Nil)
+}
 
-
-console.log('data = ', ListOps.toString(data))
-console.log('map(data, f1) =', ListOps.toString(test1))
-console.log('map(test1, f4) =', ListOps.toString(test2))
-console.log('map(test2, f3) =', ListOps.toString(test3))
-console.log('map(test3, f2) =', ListOps.toString(test4))
-console.log('foldLeft(data, 0, concat) = ', test5) // concat = 10
-console.log('foldLeft(data1, " ", concat) = ', test6) // concat =  1234567
-console.log('foldLeft(data, 1, product = ', test7) // product = 30
-console.log('foldRight(data1, " ", concat) = ', test8) // foldRight = 5673412
+const m = fromArray([1, 2, 3, 4])
+const s = fromString('12345')
+console.log('fromArray([1, 2, 3, 4]) = ', ListOps.toString(m)) // List(1, 2, 3, 4)
+console.log('fromString("12345") = ', ListOps.toString(s)) // List(1, 2, 3, 4, 5)
