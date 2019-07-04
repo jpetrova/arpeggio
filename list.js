@@ -113,9 +113,37 @@ const ListOps = {
       }
     }
     return go(xs, List.Nil)
-  }  
+  },
 
+  /**
+   * Функция fold сворачивает коллекцию. fold принимает список, начальное значение аккумулятора и
+   * функцию f. Функция f принимает аккумулятор и элемент, и возвращает новый аккумулятор.
+   */
+  foldLeft: function foldLeft(xs, zero, f) {
+    function go(xs, acc) {
+      if (ListOps.isEmpty(xs)) {
+        return acc
+      } else {
+        return go(xs.tail, f(acc, xs.head))
+      }
+    }
+    return go(xs, zero)
+  },
+
+  foldRight: function foldRight(xs, zero, f) {
+    const xs1 = ListOps.reverse(xs)
+    function go(xs, acc) {
+      if (ListOps.isEmpty(xs)) {
+        return acc
+      } else {
+        return go(xs.tail, f(acc, xs.head))
+      }
+    }
+    return go(xs1, zero)
+  }
+  
 }
+
 
 /**
  * Функция, которая принимает x и возвращает строковое представление x
@@ -161,38 +189,17 @@ function pow(x) {
   return Math.pow(x, x)
 }
  
-
 /**
- * Функция fold сворачивает коллекцию. fold принимает список, начальное значение аккумулятора и
- * функцию f. Функция f принимает аккумулятор и элемент, и возвращает новый аккумулятор.
- */
-function foldLeft(xs, zero, f) {
-  function go(xs, acc) {
-    if (ListOps.isEmpty(xs)) {
-      return acc
-    } else {
-      return go(xs.tail, f(acc, xs.head))
-    }
-  }
-  return go(xs, zero)
-}
-
-function foldRight(xs, zero, f) {
-  const xs1 = ListOps.reverse(xs)
-  function go(xs1, acc) {
-    if (ListOps.isEmpty(xs1)) {
-      return acc
-    } else {
-      return go(xs1.tail, f(acc, xs1.head))
-    }
-  }
-  return go(xs1, zero)
-}
-
-/**
- * Функция, которая принимает два элемента и объединяет их
+ * Функция, которая конкатенирует две строки
  */
 function concat(acc, x) {
+  return acc + x
+}
+
+/**
+ * Функция сложения
+ */
+function sum(acc, x) {
   return acc + x
 }
 
@@ -203,40 +210,16 @@ function product(acc, x) {
   return acc * x
 }
 
-/**
- * Функция, которая принимает массив и возвращает список
- */
-function fromArray(arr) {
-  function go(arr, xs) {
-    if (arr.length == 0) {
-      return xs
-    } else {
-      const x = arr.pop()
-      const xs1 = ListOps.prepend(x, xs) 
-      return go(arr, xs1)
-    }
-  }
-  return go(arr, List.Nil)
-}
 
-/**
- * Функция, которая принимает строку и возвращает список
- */
-function fromString(str){
-  function go(str, xs) {
-    if(str.length == 0) {
-      return ListOps.reverse(xs)
-    } else {
-      x = +str.charAt(0)
-      const xs1 = ListOps.prepend(x, xs)
-      str1 = str.substring(1)
-      return go(str1, xs1)
-    }
-  }
-  return go(str, List.Nil)
-}
+const data = List.Cons(5, List.Cons(2, List.Cons(3, List.Nil)))
+const data1 = List.Cons('12', List.Cons('34', List.Cons('567', List.Nil)))
 
-const m = fromArray([1, 2, 3, 4])
-const s = fromString('12345')
-console.log('fromArray([1, 2, 3, 4]) = ', ListOps.toString(m)) // List(1, 2, 3, 4)
-console.log('fromString("12345") = ', ListOps.toString(s)) // List(1, 2, 3, 4, 5)
+const test5 = ListOps.foldLeft(data, 0, sum)
+const test6 = ListOps.foldLeft(data1, '', concat)
+const test7 = ListOps.foldLeft(data, 1, product)
+const test8 = ListOps.foldRight(data1, '', concat)
+
+console.log('ListOps.foldLeft(data, 0, sum) = ', test5) // sum = 10
+console.log('ListOps.foldLeft(data1, " ", concat) = ', test6) // concat =  1234567
+console.log('ListOps.foldLeft(data, 1, product = ', test7) // product = 30
+console.log('ListOps.foldRight(data1, " ", concat) = ', test8) // foldRight = 5673412
