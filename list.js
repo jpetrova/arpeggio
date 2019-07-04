@@ -41,8 +41,8 @@ const List = {
         return xs
       } else {
         const x = arr.pop()
-        const xs1 = ListOps.prepend(x, xs) 
-        return go(arr, xs1)
+        const ys = ListOps.prepend(x, xs) 
+        return go(arr, ys)
       }
     }
     return go(arr, List.Nil)
@@ -56,9 +56,10 @@ const List = {
       if (str.length == 0) {
         return xs
       } else {
-        const x = str.charAt(str.length - 1)
+        const idx = str.length - 1
+        const x = str.charAt(idx)
         const ys = ListOps.prepend(x, xs)
-        return go(str.substring(0, str.length - 1), ys)
+        return go(str.substring(0, idx), ys)
       }
     }
     return go(str, List.Nil)
@@ -256,5 +257,5 @@ console.log('ListOps.foldLeft(data1, " ", concat) = ', test6) // concat =  12345
 console.log('ListOps.foldLeft(data, 1, product = ', test7) // product = 30
 console.log('ListOps.foldRight(data1, " ", concat) = ', test8) // foldRight = 5673412
 console.log('List.fromArray([1, 2, 3, 4]) = ', ListOps.toString(a)) // List(1, 2, 3, 4)
-console.log("List.fromString('12345') = ", ListOps.toString(s)) // List(1, 2, 3, 4, 5)
+console.log('List.fromString(\'12345\') = ', ListOps.toString(s)) // List(1, 2, 3, 4, 5)
   
