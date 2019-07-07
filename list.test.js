@@ -1,5 +1,4 @@
 const List = require('./list').List
-const ListOps = require('./list').ListOps
 
 const Cons = List.Cons
 const Nil = List.Nil
