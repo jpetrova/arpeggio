@@ -9,13 +9,13 @@ test('fromArray [1, 2]', () => {
   expect(xs).toStrictEqual(expected)
 })
 
-test('fromArray[1]', () => {
+test('fromArray [1]', () => {
   const xs = List.fromArray([1])
   const expected = Cons(1, Nil)
   expect(xs).toStrictEqual(expected)
 })
 
-test('fromArray[]', () => {
+test('fromArray []', () => {
   const xs = List.fromArray([])
   const expected = Nil
   expect(xs).toStrictEqual(expected)

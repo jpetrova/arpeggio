@@ -1,4 +1,3 @@
-
 /**
  * Варианты списка
  */
@@ -45,24 +44,24 @@ const List = {
         return go(arr, ys)
       }
     }
-    return go(arr, List.Nil)
+    return go(arr, Nil)
   },
 
   /**
    * Функция, которая принимает строку и возвращает список
    */
   fromString: function fromString(str){
-    function go(str, xs) {
+    function go(str, cs) {
       if (str.length == 0) {
-        return xs
+        return cs
       } else {
         const idx = str.length - 1
         const c = str.charAt(idx)
-        const ys = ListOps.prepend(c, xs)
-        return go(str.substring(0, idx), ys)
+        const xs = ListOps.prepend(c, cs)
+        return go(str.substring(0, idx), xs)
       }
     }
-    return go(str, List.Nil)
+    return go(str, Nil)
   }
 
 }
@@ -86,7 +85,7 @@ const ListOps = {
    * Вставка в начало списка
    */
   prepend: function prepend(x, xs) {
-    return List.Cons(x, xs) 
+    return Cons(x, xs) 
   },
 
   /**
@@ -103,7 +102,7 @@ const ListOps = {
         return go(xs1, ys1)
       }
     }
-    return go(xs, List.Nil)
+    return go(xs, Nil)
   },
 
   /**
@@ -144,7 +143,7 @@ const ListOps = {
         return go(xs1, ys1)
       }
     }
-    return go(xs, List.Nil)
+    return go(xs, Nil)
   },
 
   /**
@@ -172,6 +171,9 @@ const ListOps = {
   }
   
 }
+
+const Nil = List.Nil
+const Cons = List.Cons
 
 module.exports = {
   List: List,
