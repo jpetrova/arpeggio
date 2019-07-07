@@ -174,6 +174,12 @@ const ListOps = {
   
 }
 
+const Module = {
+  List: List,
+  ListOps: ListOps
+}
+
+module.exports = Module
 
 /**
  * Функция, которая принимает x и возвращает строковое представление x
