@@ -61,10 +61,24 @@ describe('isEmpty', () => {
   })
 })
 
-test('prepend', () => {
-  const xs = Cons(1, Cons(2, Nil))
-  const expected = Cons(0, Cons(1, Cons(2, Nil)))
-  expect(ListOps.prepend(0, xs)).toStrictEqual(expected)
+describe('prepend', () => {
+  test('empty List', () => {
+    const xs = Nil
+    const expected = Cons(1, Nil)
+    expect(ListOps.prepend(1, xs)).toStrictEqual(expected)
+  })
+  
+  test('one element List', () => {
+    const xs = Cons(2, Nil)
+    const expected = Cons(1, Cons(2, Nil))
+    expect(ListOps.prepend(1, xs)).toStrictEqual(expected)
+  })
+
+  test('many elements List', () => {
+    const xs = Cons(1, Cons(2, Nil))
+    const expected = Cons(0, Cons(1, Cons(2, Nil)))
+    expect(ListOps.prepend(0, xs)).toStrictEqual(expected)
+  })
 })
 
 describe('reverse', () => {
