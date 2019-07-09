@@ -46,6 +46,27 @@ describe('fromString', () => {
   })
 })
 
+describe('of', () => {
+
+  test('empty', () => {
+    const xs = List.of()
+    const expected = Nil
+    expect(xs).toStrictEqual(expected)
+  })
+
+  test('one element', () => {
+    const xs = List.of(1)
+    const expected = Cons(1, Nil)
+    expect(xs).toStrictEqual(expected)
+  })
+
+  test('many elements', () => {
+    const xs = List.of(1, 2)
+    const expected = Cons(1, Cons(2, Nil))
+    expect(xs).toStrictEqual(expected)
+  })
+})
+
 describe('isEmpty', () => {
   
   test('empty', () => {

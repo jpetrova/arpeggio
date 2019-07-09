@@ -50,7 +50,7 @@ const List = {
   /**
    * Функция, которая принимает строку и возвращает список
    */
-  fromString: function fromString(str){
+  fromString: function fromString(str) {
     function go(str, cs) {
       if (str.length == 0) {
         return cs
@@ -62,8 +62,15 @@ const List = {
       }
     }
     return go(str, Nil)
+  },
+  
+  /**
+   * Функция, которая принмает на вход неограниченное множество аргументов, представляет их 
+   * в виде массива и на выходе возращает список из элементов полученного массива
+   */
+  of: function of(...ags) {
+    return List.fromArray(ags)
   }
-
 }
 
 /**
