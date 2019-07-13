@@ -11,10 +11,9 @@ const Nil = List.Nil
  * 1234 -> '10011010010' количество единиц = 5
  */
 
-function binary(n) {
+function ones(n) {
   const str = n.toString(2)
-  const ls = List.fromString(str)
-  const xs = ListOps.map(ls, x => +x)
-  return ListOps.foldLeft(xs, 0, (acc, y) => acc + y)
+  const cs = List.fromString(str)
+  const xs = ListOps.map(cs, x => parseInt(x, 10))
+  return ListOps.foldLeft(xs, 0, (acc, x) => acc + x)
 }
-
