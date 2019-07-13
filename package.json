@@ -13,5 +13,8 @@
   "homepage": "https://github.com/jpetrova/arpeggio#readme",
   "scripts": {
     "test": "jest"
+  },
+  "jest": {
+    "verbose": true
   }
 }
