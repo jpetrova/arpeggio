@@ -18,5 +18,3 @@ function binary(n) {
   return ListOps.foldLeft(xs, 0, (acc, y) => acc + y)
 }
 
-const a = binary(1234)
-console.log('units in number = ', a)
